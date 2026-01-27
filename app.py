@@ -133,6 +133,13 @@ st.markdown("""
     }
     
     /* Cards */
+    /* ===== FIX TEXT VISIBILITY IN WELCOME CARD ===== */
+    .card h4,
+    .card li,
+    .card ol,
+    .card ul {
+    color: #1f2937 !important;
+}
     .card {
         background: white;
         padding: 2rem;
@@ -955,6 +962,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
