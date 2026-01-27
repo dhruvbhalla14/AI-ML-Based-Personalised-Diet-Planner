@@ -10,3 +10,4 @@ pytesseract
 openai
 python-dotenv
 spacy
+lightgbm
