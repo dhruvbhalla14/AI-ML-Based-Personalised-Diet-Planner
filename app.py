@@ -62,12 +62,12 @@ st.markdown("""
         text-align: center;
     }
     
-    .custom-header h1 {
+    .custom-header h1,
+    .custom-header h1 * {
     color: #ffffff !important;
     text-shadow: none !important;
 }
-}
-    .card, .card * {
+    .card {
     color: #1f2937 !important;
 }
     
@@ -966,6 +966,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
