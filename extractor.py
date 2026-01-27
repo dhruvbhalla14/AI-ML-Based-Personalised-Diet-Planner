@@ -2,32 +2,27 @@ import pdfplumber
 import pytesseract
 from PIL import Image
 import pandas as pd
-import platform
-
-# Windows only path
-if platform.system() == "Windows":
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 def extract_text(uploaded_file):
     text = ""
     numeric_data = None
 
-    file_type = uploaded_file.name.split(".")[-1].lower()
+    filename = getattr(uploaded_file, "name", "")
+    file_type = filename.split(".")[-1].lower()
+
+    uploaded_file.seek(0)
 
     # -------------------------
-    # PDF (with OCR fallback)
+    # PDF (OCR fallback)
     # -------------------------
     if file_type == "pdf":
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
 
-                # normal digital text
                 if page_text and page_text.strip():
                     text += page_text + "\n"
-
-                # scanned → OCR fallback
                 else:
                     img = page.to_image(resolution=300).original
                     text += pytesseract.image_to_string(img) + "\n"
