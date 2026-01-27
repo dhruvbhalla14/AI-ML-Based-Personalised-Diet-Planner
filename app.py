@@ -32,19 +32,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - Professional Navy Blue & Teal Theme
 st.markdown("""
 <style>
     /* Import Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
     * {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     
-    /* Main background */
+    /* Main background - Light gradient */
     .main {
-        background: linear-gradient(135deg, #ffffff 0%, #fce4ec 25%, #f3e5f5 50%, #e1f5fe 75%, #ffffff 100%);
+        background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f8 50%, #f0f9ff 100%);
     }
     
     /* Hide Streamlit branding */
@@ -54,261 +54,326 @@ st.markdown("""
     
     /* Custom header */
     .custom-header {
-        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
-        padding: 2rem;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
+        padding: 2.5rem;
+        border-radius: 16px;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 40px rgba(156, 39, 176, 0.3);
+        box-shadow: 0 10px 40px rgba(30, 58, 138, 0.25);
         text-align: center;
     }
     
     .custom-header h1 {
-        color: white;
-        font-size: 3rem;
-        font-weight: 700;
+        color: #ffffff;
+        font-size: 3.5rem;
+        font-weight: 800;
         margin: 0;
+        letter-spacing: -1px;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
     
     .custom-header p {
-        color: #fce4ec;
-        font-size: 1.2rem;
+        color: #e0f2fe;
+        font-size: 1.3rem;
         margin: 0.5rem 0 0 0;
-        font-weight: 300;
+        font-weight: 400;
     }
     
     .custom-header .credit {
-        color: white;
-        font-size: 0.9rem;
+        color: #ffffff;
+        font-size: 1rem;
         margin-top: 1rem;
-        font-weight: 500;
-        opacity: 0.9;
+        font-weight: 600;
+        opacity: 0.95;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    
+    /* Welcome card */
+    .welcome-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .welcome-card h3 {
+        color: #1e3a8a;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .welcome-card p {
+        color: #374151;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+    
+    .welcome-card h4 {
+        color: #0891b2;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 1.5rem 0 1rem 0;
+    }
+    
+    .welcome-card ol {
+        color: #374151;
+        font-size: 1.05rem;
+        line-height: 2.2;
+    }
+    
+    .welcome-card ol strong {
+        color: #1e3a8a;
+        font-weight: 600;
     }
     
     /* Cards */
     .card {
         background: white;
         padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(156, 39, 176, 0.15);
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         margin-bottom: 2rem;
-        border: 1px solid rgba(156, 39, 176, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     
     .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 48px rgba(156, 39, 176, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(30, 58, 138, 0.15);
     }
     
     /* Day card for diet plan */
     .day-card {
-        background: linear-gradient(135deg, #ffffff 0%, #fce4ec 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        margin-bottom: 1.5rem;
-        border-left: 5px solid #9c27b0;
-        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border-left: 6px solid #0891b2;
+        box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
         transition: all 0.3s ease;
     }
     
     .day-card:hover {
-        transform: translateX(10px);
-        box-shadow: 0 6px 24px rgba(156, 39, 176, 0.2);
+        transform: translateX(8px);
+        box-shadow: 0 6px 24px rgba(8, 145, 178, 0.2);
     }
     
     .day-card h3 {
-        color: #9c27b0;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        font-size: 1.4rem;
+        color: #1e3a8a;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .meal-section {
         background: white;
-        padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 0.8rem;
-        border: 1px solid rgba(233, 30, 99, 0.2);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border: 2px solid #e0f2fe;
+        min-height: 120px;
+        transition: border-color 0.2s ease;
+    }
+    
+    .meal-section:hover {
+        border-color: #0891b2;
     }
     
     .meal-section h4 {
-        color: #e91e63;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem;
+        color: #0891b2;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .meal-section p {
-        color: #424242;
-        line-height: 1.6;
+        color: #1f2937;
+        line-height: 1.8;
         margin: 0;
+        font-size: 1rem;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
         background: white;
-        padding: 2rem;
-        border-radius: 20px;
-        border: 2px dashed #9c27b0;
-        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        padding: 2.5rem;
+        border-radius: 16px;
+        border: 3px dashed #0891b2;
+        box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #e91e63;
-        background: #fce4ec;
+        border-color: #1e3a8a;
+        background: #f0f9ff;
+    }
+    
+    [data-testid="stFileUploader"] label {
+        color: #1e3a8a !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
     }
     
     /* Buttons */
     .stButton>button {
-        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+        background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
         color: white;
-        border-radius: 25px;
-        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        padding: 0.8rem 2.5rem;
         font-weight: 600;
         border: none;
-        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.3);
+        box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
         transition: all 0.3s ease;
-        font-size: 1rem;
+        font-size: 1.05rem;
     }
     
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(156, 39, 176, 0.4);
-        background: linear-gradient(135deg, #7b1fa2 0%, #c2185b 100%);
-    }
-    
-    /* Download buttons */
-    .download-btn {
-        background: white;
-        color: #9c27b0;
-        border: 2px solid #9c27b0;
-        border-radius: 25px;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        margin: 0.5rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-    }
-    
-    .download-btn:hover {
-        background: #9c27b0;
-        color: white;
-        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(30, 58, 138, 0.4);
+        background: linear-gradient(135deg, #1e40af 0%, #0e7490 100%);
     }
     
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2rem;
+        gap: 1rem;
         background: white;
         padding: 1rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     
     .stTabs [data-baseweb="tab"] {
         background: transparent;
-        color: #9c27b0;
+        color: #1e3a8a;
         font-weight: 600;
-        border-radius: 10px;
+        border-radius: 8px;
         padding: 0.75rem 1.5rem;
+        font-size: 1rem;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+        background: linear-gradient(135deg, #1e3a8a 0%, #0891b2 100%);
         color: white;
     }
     
     /* Progress bar */
     .stProgress > div > div > div > div {
-        background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+        background: linear-gradient(90deg, #1e3a8a 0%, #0891b2 100%);
     }
     
     /* Info boxes */
     .stAlert {
-        border-radius: 15px;
-        border-left: 5px solid #9c27b0;
+        border-radius: 12px;
+        border-left: 5px solid #0891b2;
     }
     
     /* Text area */
     .stTextArea textarea {
-        border-radius: 15px;
-        border: 2px solid rgba(156, 39, 176, 0.2);
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        color: #1f2937;
+        font-size: 0.95rem;
     }
     
     .stTextArea textarea:focus {
-        border-color: #9c27b0;
-        box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.1);
+        border-color: #0891b2;
+        box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
     }
     
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #f3e5f5 0%, #fce4ec 100%);
+        background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
     }
     
     [data-testid="stSidebar"] h1, 
     [data-testid="stSidebar"] h2, 
     [data-testid="stSidebar"] h3 {
-        color: #9c27b0;
-    }
-    
-    /* Success/Error messages */
-    .element-container div[data-testid="stMarkdownContainer"] p {
-        line-height: 1.6;
-    }
-    
-    /* Info box styling */
-    .info-box {
-        background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        border-left: 5px solid #9c27b0;
-        margin: 1rem 0;
-    }
-    
-    .info-box h4 {
-        color: #9c27b0;
-        margin-bottom: 0.5rem;
+        color: #1e3a8a;
     }
     
     /* Stats cards */
     .stat-card {
         background: white;
-        padding: 1.5rem;
-        border-radius: 15px;
+        padding: 2rem;
+        border-radius: 12px;
         text-align: center;
-        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
-        border-top: 4px solid #e91e63;
+        box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1);
+        border-top: 5px solid #0891b2;
+        transition: transform 0.2s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-4px);
     }
     
     .stat-card h2 {
-        color: #9c27b0;
-        font-size: 2.5rem;
+        color: #1e3a8a;
+        font-size: 3rem;
         margin: 0;
-        font-weight: 700;
+        font-weight: 800;
     }
     
     .stat-card p {
-        color: #757575;
+        color: #64748b;
         margin: 0.5rem 0 0 0;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        font-weight: 500;
     }
     
-    /* Animations */
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Section headers */
+    .section-header {
+        color: #1e3a8a;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #0891b2;
     }
     
-    .card, .day-card {
-        animation: slideIn 0.5s ease-out;
+    /* Download section */
+    .download-section {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        margin-top: 2rem;
+        border: 2px solid #0891b2;
+    }
+    
+    /* JSON display */
+    .element-container code {
+        color: #1f2937 !important;
+    }
+    
+    /* Success/Error messages with better visibility */
+    .stSuccess {
+        background-color: #d1fae5 !important;
+        color: #065f46 !important;
+    }
+    
+    .stError {
+        background-color: #fee2e2 !important;
+        color: #991b1b !important;
+    }
+    
+    .stInfo {
+        background-color: #dbeafe !important;
+        color: #1e40af !important;
+    }
+    
+    .stWarning {
+        background-color: #fef3c7 !important;
+        color: #92400e !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -320,7 +385,7 @@ st.markdown("""
 <div class="custom-header">
     <h1>🥗 AI Diet Planner</h1>
     <p>Your Personal Nutritionist Powered by Artificial Intelligence</p>
-    <div class="credit">Developed by Dhruv Bhalla | Making Healthcare Smarter with AI</div>
+    <div class="credit">💻 Developed by Dhruv Bhalla | Making Healthcare Smarter</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -352,6 +417,7 @@ def load_model():
     try:
         return joblib.load("best_model.pkl")
     except Exception as e:
+        st.warning(f"ML Model not loaded: {e}")
         return None
 
 model = load_model()
@@ -371,16 +437,16 @@ def generate_pdf(diet_plan_data, patient_info):
         'CustomTitle',
         parent=styles['Heading1'],
         fontSize=24,
-        textColor=colors.HexColor('#9c27b0'),
+        textColor=colors.HexColor('#1e3a8a'),
         spaceAfter=30,
-        alignment=1  # Center
+        alignment=1
     )
     
     heading_style = ParagraphStyle(
         'CustomHeading',
         parent=styles['Heading2'],
         fontSize=16,
-        textColor=colors.HexColor('#e91e63'),
+        textColor=colors.HexColor('#0891b2'),
         spaceAfter=12,
         spaceBefore=12
     )
@@ -397,20 +463,25 @@ def generate_pdf(diet_plan_data, patient_info):
         info_data = [[k, str(v)] for k, v in patient_info.items()]
         info_table = Table(info_data, colWidths=[2*inch, 4*inch])
         info_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f3e5f5')),
+            ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#e0f2fe')),
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
             ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, -1), 10),
             ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#9c27b0'))
+            ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#0891b2'))
         ]))
         story.append(info_table)
         story.append(Spacer(1, 0.3*inch))
     
     # Diet Plan
     story.append(Paragraph("Your Weekly Diet Plan", heading_style))
-    story.append(Paragraph(diet_plan_data, styles['Normal']))
+    
+    # Split into paragraphs for better formatting
+    for line in diet_plan_data.split('\n'):
+        if line.strip():
+            story.append(Paragraph(line, styles['Normal']))
+            story.append(Spacer(1, 0.1*inch))
     
     # Footer
     story.append(Spacer(1, 0.5*inch))
@@ -425,19 +496,25 @@ def generate_pdf(diet_plan_data, patient_info):
 # Parse Diet Plan into Days
 # -----------------------
 def parse_diet_plan(plan_text):
-    """Parse the diet plan text into structured day-by-day format"""
+    """Parse the diet plan text into structured day-by-day format with better parsing"""
     days = []
     current_day = None
+    current_meal = None
     
     lines = plan_text.split('\n')
     
     for line in lines:
         line = line.strip()
-        if not line:
+        if not line or line in ['---', '***', '___']:
             continue
-            
-        # Detect day headers
-        if any(day in line.lower() for day in ['day 1', 'day 2', 'day 3', 'day 4', 'day 5', 'day 6', 'day 7']):
+        
+        line_lower = line.lower()
+        
+        # Detect day headers (more flexible)
+        day_keywords = ['day 1', 'day 2', 'day 3', 'day 4', 'day 5', 'day 6', 'day 7',
+                        'day one', 'day two', 'day three', 'day four', 'day five', 'day six', 'day seven']
+        
+        if any(keyword in line_lower for keyword in day_keywords):
             if current_day:
                 days.append(current_day)
             current_day = {
@@ -445,19 +522,35 @@ def parse_diet_plan(plan_text):
                 'breakfast': '',
                 'lunch': '',
                 'dinner': '',
-                'other': ''
+                'snacks': '',
+                'notes': ''
             }
-        elif current_day:
-            # Categorize meals
-            line_lower = line.lower()
-            if 'breakfast' in line_lower or 'morning' in line_lower:
-                current_day['breakfast'] += line + '\n'
-            elif 'lunch' in line_lower or 'afternoon' in line_lower:
-                current_day['lunch'] += line + '\n'
-            elif 'dinner' in line_lower or 'evening' in line_lower:
-                current_day['dinner'] += line + '\n'
-            else:
-                current_day['other'] += line + '\n'
+            current_meal = None
+            continue
+        
+        if current_day:
+            # Detect meal sections
+            if 'breakfast' in line_lower or 'morning meal' in line_lower:
+                current_meal = 'breakfast'
+                continue
+            elif 'lunch' in line_lower or 'afternoon meal' in line_lower or 'mid-day' in line_lower:
+                current_meal = 'lunch'
+                continue
+            elif 'dinner' in line_lower or 'evening meal' in line_lower or 'night' in line_lower:
+                current_meal = 'dinner'
+                continue
+            elif 'snack' in line_lower or 'mid-meal' in line_lower:
+                current_meal = 'snacks'
+                continue
+            elif any(word in line_lower for word in ['note', 'tip', 'important', 'remember', 'hydration']):
+                current_meal = 'notes'
+            
+            # Add content to appropriate meal section
+            if current_meal:
+                # Clean up the line
+                line = line.replace('**', '').replace('*', '').strip()
+                if line and not line.startswith('#'):
+                    current_day[current_meal] += line + '\n'
     
     if current_day:
         days.append(current_day)
@@ -465,47 +558,65 @@ def parse_diet_plan(plan_text):
     return days
 
 # -----------------------
-# Diet Plan Generator
+# Diet Plan Generator with improved prompt
 # -----------------------
 def generate_week_plan(structured, prediction):
     if not client:
         return "⚠️ OpenAI API not configured. Please add OPENAI_API_KEY."
 
     prompt = f"""
-You are an expert clinical nutritionist creating a personalized diet plan.
+You are an expert clinical nutritionist creating a personalized Indian diet plan.
 
-Patient condition: {structured}
-Health risk score: {prediction}
+Patient Information:
+- Condition: {structured.get('condition', 'General')}
+- Health Risk Score: {prediction}
+- Detected Issues: {', '.join(structured.get('diseases', ['None']))}
 
-Create a detailed 7-day Indian diet plan with:
+Create a DETAILED 7-day Indian diet plan. For EACH day from Day 1 to Day 7, provide:
 
-For EACH DAY (Day 1 through Day 7):
-- **Breakfast**: Specific items with approximate portions
-- **Lunch**: Specific items with approximate portions  
-- **Dinner**: Specific items with approximate portions
-- Brief note on timing or preparation tips
+**Day [Number]**
 
-Also include:
-- Foods to AVOID
-- Foods to PREFER
-- Key nutritional tips
-- Hydration advice
+**Breakfast:**
+- Specific items with quantities (e.g., 2 chapatis, 1 cup dal, etc.)
+- Cooking method if relevant
 
-Use simple, home-cooked Indian foods. Be specific about portions and preparations.
-Format clearly with day numbers and meal labels.
+**Lunch:**
+- Specific items with quantities
+- Include rice/roti, vegetables, dal, salad
 
-IMPORTANT: This is guidance only, not medical advice.
+**Dinner:**
+- Specific items with quantities
+- Light but nutritious options
+
+**Snacks (Optional):**
+- Healthy between-meal options
+
+**Important Notes:**
+- Hydration reminders
+- Timing suggestions
+- Any preparation tips
+
+At the end, include:
+- Foods to COMPLETELY AVOID
+- Foods to PREFER and increase
+- General nutritional guidelines
+
+Use simple, home-cooked Indian foods. Be very specific about portions.
+Keep each meal description clear and detailed.
+
+IMPORTANT: This is dietary guidance, not medical advice. Patient should consult healthcare professionals.
 """
 
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
+            temperature=0.3,
+            max_tokens=2000
         )
         return response.choices[0].message.content
     except Exception as e:
-        return f"⚠️ Error generating diet plan: {str(e)}"
+        return f"⚠️ Error generating diet plan: {str(e)}\n\nPlease check your OpenAI API key and internet connection."
 
 # -----------------------
 # Sidebar
@@ -516,11 +627,11 @@ with st.sidebar:
     This AI-powered diet planner analyzes your medical reports and generates personalized weekly diet plans.
     
     **Features:**
-    - 📄 Upload any medical document
-    - 🧠 AI entity extraction
+    - 📄 Multi-format support (PDF, Images, CSV, TXT)
+    - 🧠 AI medical entity extraction
     - 📊 Health risk assessment
-    - 🥗 7-day personalized diet
-    - 📥 Download as PDF/JSON
+    - 🥗 7-day personalized Indian diet
+    - 📥 Download as PDF or JSON
     """)
     
     st.markdown("### 👨‍💻 Developer")
@@ -532,295 +643,330 @@ with st.sidebar:
     Making healthcare accessible through artificial intelligence.
     """)
     
+    st.markdown("### ⚙️ System Status")
     if model:
         st.success("✅ ML Model: Loaded")
     else:
-        st.warning("⚠️ ML Model: Not loaded")
+        st.warning("⚠️ ML Model: Not available")
     
     if client:
-        st.success("✅ AI Engine: Connected")
+        st.success("✅ OpenAI API: Connected")
     else:
-        st.warning("⚠️ AI Engine: Disconnected")
+        st.error("❌ OpenAI API: Not connected")
 
 # -----------------------
 # Main App
 # -----------------------
 
-st.markdown("### 📤 Upload Your Medical Report")
+st.markdown('<h2 class="section-header">📤 Upload Your Medical Report</h2>', unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader(
     "Drag and drop or click to upload (PDF, Image, CSV, TXT)",
     type=["pdf", "png", "jpg", "jpeg", "csv", "txt"],
-    help="Upload any medical report or prescription"
+    help="Upload any medical report, prescription, or health document"
 )
 
+# Generate button (only show when file is uploaded)
 if uploaded_file:
-    
-    # Create columns for better layout
-    col1, col2 = st.columns([1, 1])
-    
-    with col1:
-        st.markdown("### 📋 Analysis Progress")
-        progress_bar = st.progress(0)
-        status_text = st.empty()
-    
-    with col2:
-        st.markdown("### 📊 Quick Stats")
-        stat_col1, stat_col2 = st.columns(2)
-    
-    try:
-        # -----------------------
-        # Step 1: Extract Text
-        # -----------------------
-        status_text.info("📄 Extracting text from document...")
-        progress_bar.progress(15)
+    if st.button("🚀 Generate Personalized Diet Plan", type="primary", use_container_width=True):
         
-        text, numeric_data = extract_text(uploaded_file)
+        # Create columns for better layout
+        col1, col2 = st.columns([1, 1])
         
-        with stat_col1:
-            st.markdown(f"""
-            <div class="stat-card">
-                <h2>{len(text)}</h2>
-                <p>Characters Extracted</p>
-            </div>
-            """, unsafe_allow_html=True)
+        with col1:
+            st.markdown("### 📋 Analysis Progress")
+            progress_bar = st.progress(0)
+            status_text = st.empty()
         
-        progress_bar.progress(25)
+        with col2:
+            st.markdown("### 📊 Quick Stats")
+            stat_col1, stat_col2 = st.columns(2)
         
-        # -----------------------
-        # Step 2: NLP Analysis
-        # -----------------------
-        status_text.info("🧠 Analyzing medical information...")
-        progress_bar.progress(35)
-        
-        sentences = clean_and_segment(text)
-        progress_bar.progress(45)
-        
-        entities = extract_entities(sentences)
-        progress_bar.progress(55)
-        
-        intents = classify_intents(sentences)
-        progress_bar.progress(65)
-        
-        structured = build_structured_intent(entities, intents)
-        guidelines = generate_diet_guidelines(structured)
-        
-        with stat_col2:
-            st.markdown(f"""
-            <div class="stat-card">
-                <h2>{len(entities)}</h2>
-                <p>Medical Entities Found</p>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        progress_bar.progress(75)
-        
-        # -----------------------
-        # Step 3: ML Prediction
-        # -----------------------
-        status_text.info("📊 Running health assessment...")
-        progress_bar.progress(80)
-        
-        if numeric_data and model:
-            features = [list(numeric_data.values())]
-            prediction = model.predict(features)[0]
-        else:
-            prediction = "Insufficient data for numerical prediction"
-        
-        progress_bar.progress(85)
-        
-        # -----------------------
-        # Step 4: Generate Diet Plan
-        # -----------------------
-        status_text.info("🥗 Generating personalized diet plan...")
-        progress_bar.progress(90)
-        
-        plan = generate_week_plan(guidelines, prediction)
-        
-        progress_bar.progress(100)
-        status_text.success("✅ Analysis Complete!")
-        
-        # Clear progress indicators after a moment
-        import time
-        time.sleep(1)
-        progress_bar.empty()
-        status_text.empty()
-        
-        # -----------------------
-        # Display Results in Tabs
-        # -----------------------
-        st.markdown("---")
-        
-        tab1, tab2, tab3, tab4 = st.tabs(["📄 Extracted Data", "🧠 Medical Analysis", "📊 Health Assessment", "🥗 Diet Plan"])
-        
-        with tab1:
-            st.markdown('<div class="card">', unsafe_allow_html=True)
-            st.markdown("#### 📄 Extracted Text from Document")
-            st.text_area("", text, height=300, label_visibility="collapsed")
-            st.markdown('</div>', unsafe_allow_html=True)
-        
-        with tab2:
-            st.markdown('<div class="card">', unsafe_allow_html=True)
-            st.markdown("#### 🧠 AI-Detected Medical Information")
+        try:
+            # -----------------------
+            # Step 1: Extract Text
+            # -----------------------
+            status_text.info("📄 Extracting text from document...")
+            progress_bar.progress(15)
             
-            col1, col2 = st.columns(2)
+            text, numeric_data = extract_text(uploaded_file)
             
-            with col1:
-                st.markdown("**🔍 Detected Conditions:**")
-                if guidelines.get('condition') and guidelines['condition'] != "General":
-                    st.info(guidelines['condition'])
-                else:
-                    st.info("No specific conditions detected")
-                
-                st.markdown("**✅ Recommended Foods:**")
-                for food in guidelines.get('allowed_foods', []):
-                    st.success(f"• {food}")
+            if not text or len(text.strip()) < 10:
+                st.error("❌ Could not extract meaningful text from the file. Please ensure the file contains readable text.")
+                st.stop()
             
-            with col2:
-                st.markdown("**❌ Foods to Avoid:**")
-                for food in guidelines.get('restricted_foods', []):
-                    st.error(f"• {food}")
-                
-                st.markdown("**💡 Lifestyle Advice:**")
-                st.info(guidelines.get('lifestyle_advice', 'No specific advice'))
+            with stat_col1:
+                st.markdown(f"""
+                <div class="stat-card">
+                    <h2>{len(text)}</h2>
+                    <p>Characters Extracted</p>
+                </div>
+                """, unsafe_allow_html=True)
             
-            st.markdown('</div>', unsafe_allow_html=True)
-        
-        with tab3:
-            st.markdown('<div class="card">', unsafe_allow_html=True)
-            st.markdown("#### 📊 Health Risk Assessment")
+            progress_bar.progress(25)
             
-            if isinstance(prediction, str):
-                st.info(f"**Result:** {prediction}")
+            # -----------------------
+            # Step 2: NLP Analysis
+            # -----------------------
+            status_text.info("🧠 Analyzing medical information (may take 1-2 minutes on first load)...")
+            progress_bar.progress(35)
+            
+            sentences = clean_and_segment(text)
+            progress_bar.progress(45)
+            
+            entities = extract_entities(sentences)
+            progress_bar.progress(55)
+            
+            intents = classify_intents(sentences)
+            progress_bar.progress(65)
+            
+            structured = build_structured_intent(entities, intents)
+            guidelines = generate_diet_guidelines(structured)
+            
+            with stat_col2:
+                st.markdown(f"""
+                <div class="stat-card">
+                    <h2>{len(entities)}</h2>
+                    <p>Medical Entities Found</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            progress_bar.progress(75)
+            
+            # -----------------------
+            # Step 3: ML Prediction
+            # -----------------------
+            status_text.info("📊 Running health assessment...")
+            progress_bar.progress(80)
+            
+            if numeric_data and model:
+                try:
+                    # Convert numeric_data to proper format
+                    features = [[float(v) if isinstance(v, (int, float, str)) and str(v).replace('.','',1).replace('-','',1).isdigit() else 0 for v in numeric_data.values()]]
+                    prediction = model.predict(features)[0]
+                except Exception as e:
+                    prediction = f"Could not generate prediction: {str(e)}"
             else:
-                st.success(f"**Health Risk Score:** {prediction}")
+                prediction = "Insufficient numerical data for ML prediction"
             
-            st.warning("⚠️ **Important:** This is an AI assessment, not a medical diagnosis. Always consult with healthcare professionals.")
-            st.markdown('</div>', unsafe_allow_html=True)
-        
-        with tab4:
-            st.markdown("#### 🥗 Your Personalized Weekly Diet Plan")
+            progress_bar.progress(85)
             
-            # Parse diet plan into days
-            days = parse_diet_plan(plan)
+            # -----------------------
+            # Step 4: Generate Diet Plan
+            # -----------------------
+            status_text.info("🥗 Generating personalized 7-day diet plan...")
+            progress_bar.progress(90)
             
-            if days:
-                # Display in card format
-                for day in days:
-                    st.markdown(f"""
-                    <div class="day-card">
-                        <h3>📅 {day['title']}</h3>
-                    """, unsafe_allow_html=True)
+            plan = generate_week_plan(guidelines, prediction)
+            
+            progress_bar.progress(100)
+            status_text.success("✅ Analysis Complete!")
+            
+            # Clear progress indicators
+            import time
+            time.sleep(1)
+            progress_bar.empty()
+            status_text.empty()
+            
+            # -----------------------
+            # Display Results in Tabs
+            # -----------------------
+            st.markdown("---")
+            
+            tab1, tab2, tab3, tab4 = st.tabs(["📄 Extracted Data", "🧠 Medical Analysis", "📊 Health Assessment", "🥗 Your Diet Plan"])
+            
+            with tab1:
+                st.markdown('<div class="card">', unsafe_allow_html=True)
+                st.markdown("#### 📄 Extracted Text from Your Document")
+                st.text_area("", text, height=300, label_visibility="collapsed", key="extracted_text")
+                st.markdown('</div>', unsafe_allow_html=True)
+            
+            with tab2:
+                st.markdown('<div class="card">', unsafe_allow_html=True)
+                st.markdown("#### 🧠 AI-Detected Medical Information")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.markdown("**🔍 Detected Conditions:**")
+                    if guidelines.get('condition') and guidelines['condition'] != "General":
+                        st.info(guidelines['condition'])
+                    else:
+                        st.info("No specific conditions detected - General health plan")
                     
-                    col1, col2, col3 = st.columns(3)
+                    st.markdown("**✅ Recommended Foods:**")
+                    for food in guidelines.get('allowed_foods', []):
+                        st.success(f"• {food}")
+                
+                with col2:
+                    st.markdown("**❌ Foods to Avoid:**")
+                    for food in guidelines.get('restricted_foods', []):
+                        st.error(f"• {food}")
                     
-                    with col1:
-                        if day['breakfast'].strip():
+                    st.markdown("**💡 Lifestyle Advice:**")
+                    st.info(guidelines.get('lifestyle_advice', 'Maintain a balanced lifestyle with regular exercise'))
+                
+                st.markdown('</div>', unsafe_allow_html=True)
+            
+            with tab3:
+                st.markdown('<div class="card">', unsafe_allow_html=True)
+                st.markdown("#### 📊 Health Risk Assessment")
+                
+                st.success(f"**Assessment Result:** {prediction}")
+                
+                st.warning("⚠️ **Important Disclaimer:** This is an AI-based assessment for informational purposes only. Always consult with qualified healthcare professionals for medical advice, diagnosis, or treatment.")
+                st.markdown('</div>', unsafe_allow_html=True)
+            
+            with tab4:
+                st.markdown('<h3 class="section-header">🥗 Your Personalized 7-Day Diet Plan</h3>', unsafe_allow_html=True)
+                
+                # Parse diet plan into days
+                days = parse_diet_plan(plan)
+                
+                if days and len(days) > 0:
+                    # Display in beautiful card format
+                    for day in days:
+                        st.markdown(f"""
+                        <div class="day-card">
+                            <h3>📅 {day['title']}</h3>
+                        """, unsafe_allow_html=True)
+                        
+                        # Create 3 columns for meals
+                        meal_col1, meal_col2, meal_col3 = st.columns(3)
+                        
+                        with meal_col1:
                             st.markdown(f"""
                             <div class="meal-section">
                                 <h4>🌅 Breakfast</h4>
-                                <p>{day['breakfast']}</p>
+                                <p>{day['breakfast'].strip() if day['breakfast'].strip() else 'Similar to Day 1 breakfast options'}</p>
                             </div>
                             """, unsafe_allow_html=True)
-                    
-                    with col2:
-                        if day['lunch'].strip():
+                        
+                        with meal_col2:
                             st.markdown(f"""
                             <div class="meal-section">
                                 <h4>☀️ Lunch</h4>
-                                <p>{day['lunch']}</p>
+                                <p>{day['lunch'].strip() if day['lunch'].strip() else 'Similar to Day 1 lunch options'}</p>
                             </div>
                             """, unsafe_allow_html=True)
-                    
-                    with col3:
-                        if day['dinner'].strip():
+                        
+                        with meal_col3:
                             st.markdown(f"""
                             <div class="meal-section">
                                 <h4>🌙 Dinner</h4>
-                                <p>{day['dinner']}</p>
+                                <p>{day['dinner'].strip() if day['dinner'].strip() else 'Similar to Day 1 dinner options'}</p>
                             </div>
                             """, unsafe_allow_html=True)
-                    
-                    if day['other'].strip():
-                        st.markdown(f"""
-                        <div class="meal-section">
-                            <h4>📝 Additional Notes</h4>
-                            <p>{day['other']}</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                # Fallback to regular display
-                st.markdown(f'<div class="card">{plan}</div>', unsafe_allow_html=True)
-            
-            # Download buttons
-            st.markdown("---")
-            st.markdown("### 📥 Download Your Diet Plan")
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                # JSON download
-                diet_data = {
-                    "generated_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "patient_info": guidelines,
-                    "health_assessment": str(prediction),
-                    "diet_plan": plan,
-                    "developer": "Dhruv Bhalla"
-                }
+                        
+                        # Show snacks and notes if available
+                        if day['snacks'].strip() or day['notes'].strip():
+                            notes_col1, notes_col2 = st.columns(2)
+                            
+                            if day['snacks'].strip():
+                                with notes_col1:
+                                    st.markdown(f"""
+                                    <div class="meal-section">
+                                        <h4>🍎 Snacks</h4>
+                                        <p>{day['snacks'].strip()}</p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                            
+                            if day['notes'].strip():
+                                with notes_col2:
+                                    st.markdown(f"""
+                                    <div class="meal-section">
+                                        <h4>📝 Notes</h4>
+                                        <p>{day['notes'].strip()}</p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                        
+                        st.markdown('</div>', unsafe_allow_html=True)
+                else:
+                    # Fallback display
+                    st.markdown(f'<div class="card">{plan}</div>', unsafe_allow_html=True)
                 
-                json_str = json.dumps(diet_data, indent=2)
-                st.download_button(
-                    label="📄 Download as JSON",
-                    data=json_str,
-                    file_name=f"diet_plan_{datetime.now().strftime('%Y%m%d')}.json",
-                    mime="application/json",
-                    use_container_width=True
-                )
-            
-            with col2:
-                # PDF download
-                patient_info = {
-                    "Condition": guidelines.get('condition', 'General'),
-                    "Health Assessment": str(prediction),
-                    "Generated Date": datetime.now().strftime("%B %d, %Y")
-                }
+                # Download section
+                st.markdown('<div class="download-section">', unsafe_allow_html=True)
+                st.markdown("### 📥 Download Your Diet Plan")
                 
-                pdf_buffer = generate_pdf(plan, patient_info)
-                st.download_button(
-                    label="📑 Download as PDF",
-                    data=pdf_buffer,
-                    file_name=f"diet_plan_{datetime.now().strftime('%Y%m%d')}.pdf",
-                    mime="application/pdf",
-                    use_container_width=True
-                )
-        
-    except Exception as e:
-        st.error(f"⚠️ An error occurred: {str(e)}")
-        st.info("Please try uploading a different file or contact support.")
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # JSON download
+                    diet_data = {
+                        "generated_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "patient_info": guidelines,
+                        "health_assessment": str(prediction),
+                        "diet_plan": plan,
+                        "developer": "Dhruv Bhalla",
+                        "disclaimer": "This is AI-generated guidance, not medical advice"
+                    }
+                    
+                    json_str = json.dumps(diet_data, indent=2)
+                    st.download_button(
+                        label="📄 Download as JSON",
+                        data=json_str,
+                        file_name=f"diet_plan_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                        mime="application/json",
+                        use_container_width=True
+                    )
+                
+                with col2:
+                    # PDF download
+                    patient_info = {
+                        "Condition": guidelines.get('condition', 'General'),
+                        "Health Assessment": str(prediction),
+                        "Generated Date": datetime.now().strftime("%B %d, %Y at %I:%M %p")
+                    }
+                    
+                    pdf_buffer = generate_pdf(plan, patient_info)
+                    st.download_button(
+                        label="📑 Download as PDF",
+                        data=pdf_buffer,
+                        file_name=f"diet_plan_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf",
+                        mime="application/pdf",
+                        use_container_width=True
+                    )
+                
+                st.markdown('</div>', unsafe_allow_html=True)
+            
+        except Exception as e:
+            st.error(f"⚠️ An error occurred during processing: {str(e)}")
+            st.info("Please try uploading a different file or check if the file format is supported. If the issue persists, contact support.")
+            import traceback
+            st.code(traceback.format_exc())
 
 else:
-    # Show welcome message when no file is uploaded
+    # Welcome message when no file is uploaded
     st.markdown("""
-    <div class="card">
-        <h3 style="color: #9c27b0;">👋 Welcome to AI Diet Planner!</h3>
-        <p style="font-size: 1.1rem; line-height: 1.8;">
-            Upload your medical report to get started. Our AI will analyze your health data 
-            and create a personalized 7-day diet plan tailored to your needs.
+    <div class="welcome-card">
+        <h3>👋 Welcome to AI Diet Planner!</h3>
+        <p>
+            Upload your medical report to get started. Our advanced AI will analyze your health data 
+            and create a personalized 7-day Indian diet plan tailored specifically to your needs.
         </p>
-        <br>
-        <h4 style="color: #e91e63;">How it works:</h4>
-        <ol style="line-height: 2;">
-            <li><strong>Upload</strong> - Add your medical report (PDF, image, or text)</li>
-            <li><strong>Analyze</strong> - AI extracts medical entities and assesses health</li>
-            <li><strong>Generate</strong> - Get a personalized weekly diet plan</li>
-            <li><strong>Download</strong> - Save your plan as PDF or JSON</li>
+        
+        <h4>📋 How it works:</h4>
+        <ol>
+            <li><strong>Upload</strong> your medical report (PDF, image, CSV, or text file)</li>
+            <li><strong>Click "Generate Diet Plan"</strong> to start the analysis</li>
+            <li><strong>Review</strong> your personalized diet plan with day-by-day meal suggestions</li>
+            <li><strong>Download</strong> your plan as PDF or JSON for easy reference</li>
         </ol>
-        <br>
-        <p style="color: #757575; font-style: italic;">
-            ⚠️ This tool provides dietary guidance based on AI analysis. Always consult 
-            with healthcare professionals for medical advice.
+        
+        <h4>✨ What you'll get:</h4>
+        <ul style="line-height: 2;">
+            <li>🔍 AI-powered analysis of your medical data</li>
+            <li>📊 Health risk assessment</li>
+            <li>🥗 Complete 7-day Indian diet plan</li>
+            <li>🍽️ Breakfast, lunch, and dinner suggestions for each day</li>
+            <li>✅ Foods to eat and ❌ foods to avoid</li>
+            <li>📥 Downloadable PDF and JSON formats</li>
+        </ul>
+        
+        <p style="color: #64748b; font-style: italic; margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0891b2;">
+            ⚠️ <strong>Important:</strong> This tool provides dietary guidance based on AI analysis. 
+            Always consult with qualified healthcare professionals for medical advice, diagnosis, or treatment decisions.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -828,13 +974,12 @@ else:
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; padding: 2rem; color: #757575;">
-    <p style="font-size: 0.9rem;">
-        Developed with ❤️ by <strong style="color: #9c27b0;">Dhruv Bhalla</strong> | 
-        Powered by AI & Machine Learning
+<div style="text-align: center; padding: 2rem; color: #64748b;">
+    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">
+        Developed with ❤️ by <strong style="color: #1e3a8a;">Dhruv Bhalla</strong>
     </p>
-    <p style="font-size: 0.8rem;">
-        Making healthcare smarter, one diet plan at a time 🥗
+    <p style="font-size: 0.95rem;">
+        Powered by AI & Machine Learning | Making healthcare smarter, one diet plan at a time 🥗
     </p>
 </div>
 """, unsafe_allow_html=True)
