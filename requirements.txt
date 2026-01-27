@@ -8,3 +8,4 @@ Pillow
 pdfplumber
 pytesseract
 openai
+python-dotenv
