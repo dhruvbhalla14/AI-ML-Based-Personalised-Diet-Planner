@@ -1,0 +1,16 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# huggingface cache
+.cache/
+*.safetensors
+
+# system
+.DS_Store
+
+# large temp files
+*.log

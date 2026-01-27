@@ -1,0 +1,11 @@
+streamlit
+transformers
+torch
+pytesseract
+pdfplumber
+joblib
+openai
+python-dotenv
+Pillow
+spacy
+pandas
