@@ -426,18 +426,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-.main {
-    background: #f7f9fc;
-    color: #1f2937;
-}
-
-.card {
-    color: #1f2937;
-}
-
-.day-card {
-    color: #1f2937;
-}
 # -----------------------
 # Header
 # -----------------------
@@ -971,4 +959,5 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
