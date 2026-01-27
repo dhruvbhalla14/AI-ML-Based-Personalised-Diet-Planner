@@ -11,3 +11,4 @@ openai
 python-dotenv
 spacy
 lightgbm
+scikit-learn
