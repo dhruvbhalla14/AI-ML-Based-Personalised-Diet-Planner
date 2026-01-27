@@ -2,17 +2,10 @@ import re
 import spacy
 from transformers import pipeline
 
-# Load models once
-nlp = spacy.load("en_core_web_sm")
-ner_model = pipeline(
-    "ner",
-    model="d4data/biomedical-ner-all",
-    aggregation_strategy="simple"
-)
-classifier = pipeline(
-    "zero-shot-classification",
-    model="typeform/distilbert-base-uncased-mnli"
-)
+# Don't load models at import time - load them lazily
+_nlp = None
+_ner_model = None
+_classifier = None
 
 LABELS = [
     "diagnosis",
@@ -21,19 +14,50 @@ LABELS = [
     "lifestyle advice"
 ]
 
+def get_nlp():
+    """Lazy load spacy model"""
+    global _nlp
+    if _nlp is None:
+        _nlp = spacy.load("en_core_web_sm")
+    return _nlp
+
+def get_ner_model():
+    """Lazy load NER model"""
+    global _ner_model
+    if _ner_model is None:
+        _ner_model = pipeline(
+            "ner",
+            model="d4data/biomedical-ner-all",
+            aggregation_strategy="simple"
+        )
+    return _ner_model
+
+def get_classifier():
+    """Lazy load classifier"""
+    global _classifier
+    if _classifier is None:
+        _classifier = pipeline(
+            "zero-shot-classification",
+            model="typeform/distilbert-base-uncased-mnli"
+        )
+    return _classifier
+
 def clean_and_segment(text):
     text = text.lower()
     text = re.sub(r"[^a-zA-Z0-9., ]", "", text)
+    nlp = get_nlp()
     doc = nlp(text)
     return [sent.text.strip() for sent in doc.sents if len(sent.text.strip()) > 5]
 
 def extract_entities(sentences):
+    ner_model = get_ner_model()
     entities = []
     for s in sentences:
         entities.extend(ner_model(s))
     return entities
 
 def classify_intents(sentences):
+    classifier = get_classifier()
     results = []
     for s in sentences:
         out = classifier(s, LABELS)
