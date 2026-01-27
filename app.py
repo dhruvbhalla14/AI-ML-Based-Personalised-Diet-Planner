@@ -251,3 +251,5 @@ if uploaded_file:
 
 else:
     st.info("Upload a medical report to start analysis.")
+text, numeric_data = extract_text(uploaded_file)
+st.write("Extracted chars:", len(text))
