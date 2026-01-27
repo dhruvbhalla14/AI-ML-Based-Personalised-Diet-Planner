@@ -63,12 +63,10 @@ st.markdown("""
     }
     
     .custom-header h1 {
-        color: #ffffff;
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin: 0;
-        letter-spacing: -1px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    color: #ffffff;
+    text-shadow: 0 4px 14px rgba(0,0,0,0.45);  /* strong contrast */
+    letter-spacing: 1px;
+
     }
     
     .custom-header p {
@@ -959,5 +957,6 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
