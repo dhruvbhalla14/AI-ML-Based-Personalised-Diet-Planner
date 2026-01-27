@@ -430,6 +430,35 @@ st.markdown("""
     .download-section h3 {
         color: #1e3a8a !important;
     }
+
+    /* ============================= */
+/* FORCE HIGH CONTRAST TEXT FIX */
+/* ============================= */
+
+/* All normal text inside app */
+section, section * {
+    color: #e5e7eb !important;
+}
+
+/* Cards / tabs / panels text */
+.stTabs, .stTabs * ,
+.card, .card *,
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] * {
+    color: #f1f5f9 !important;
+}
+
+/* Header title PURE WHITE */
+.custom-header h1 {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    font-weight: 800 !important;
+}
+
+/* Info/Success/Warning boxes text visible */
+.stInfo, .stSuccess, .stWarning, .stError {
+    color: #111827 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -966,6 +995,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
