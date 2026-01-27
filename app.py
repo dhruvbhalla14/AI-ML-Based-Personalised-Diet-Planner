@@ -23,47 +23,154 @@ st.set_page_config(
 # -------------------------------------------------
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ------------------------------------------------ */
+/* CLEANER BACKGROUND (less noisy, more pro) */
+/* ------------------------------------------------ */
 .main {
-    background: #f6f8fb;
+    background: linear-gradient(135deg,#f8fafc,#eef2f7);
 }
 
-/* header */
-.header {
-    background: linear-gradient(90deg,#4f46e5,#7c3aed);
-    padding: 25px;
-    border-radius: 14px;
-    color: white;
-    text-align: center;
-    margin-bottom: 25px;
+/* Hide Streamlit branding */
+#MainMenu, footer, header {visibility:hidden;}
+
+
+/* ------------------------------------------------ */
+/* HEADER – slightly sharper */
+/* ------------------------------------------------ */
+.custom-header {
+    background: linear-gradient(135deg,#9c27b0,#e91e63);
+    padding: 1.6rem;
+    border-radius: 18px;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 8px 30px rgba(156,39,176,.25);
 }
 
-/* cards */
+.custom-header h1 {
+    font-size: 2.6rem;
+}
+
+
+/* ------------------------------------------------ */
+/* CARDS – more professional density */
+/* ------------------------------------------------ */
 .card {
     background: white;
-    padding: 18px;
+    padding: 1.4rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* ------------------------------------------------ */
+/* STAT CARDS – numbers pop */
+/* ------------------------------------------------ */
+.stat-card {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    border-top: 5px solid #e91e63;
+}
+
+.stat-card h2 {
+    font-size: 2.2rem;
+    color: #9c27b0;
+}
+
+
+/* ------------------------------------------------ */
+/* DAY CARD – premium look */
+/* ------------------------------------------------ */
+.day-card {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+    border-left: 6px solid #9c27b0;
+    box-shadow: 0 3px 14px rgba(0,0,0,.06);
+    transition: .25s;
+}
+
+.day-card:hover {
+    transform: translateX(6px);
+}
+
+/* FIX TEXT VISIBILITY (IMPORTANT) */
+.day-card,
+.day-card p,
+.day-card div,
+.day-card span {
+    color: #111 !important;
+}
+
+
+/* ------------------------------------------------ */
+/* MEAL BOXES – glass style */
+/* ------------------------------------------------ */
+.meal-section {
+    background: #fafafa;
+    padding: .9rem;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    transition: .2s;
+}
+
+.meal-section:hover {
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+
+.meal-section h4 {
+    color: #e91e63;
+}
+
+
+/* ------------------------------------------------ */
+/* UPLOADER */
+/* ------------------------------------------------ */
+[data-testid="stFileUploader"] {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 14px;
+    border: 2px dashed #9c27b0;
+}
+
+
+/* ------------------------------------------------ */
+/* BUTTONS */
+/* ------------------------------------------------ */
+.stButton>button {
+    background: linear-gradient(135deg,#9c27b0,#e91e63);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-bottom: 15px;
+    font-weight: 600;
+    height: 42px;
 }
 
-/* day boxes */
-.daybox {
-    background: #ffffff;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    border-left: 5px solid #4CAF50;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-
-    color: #000000;          /* ✅ ADD THIS */
+.stButton>button:hover {
+    transform: scale(1.03);
 }
 
-/* force pre text black */
-.daybox pre {
-    color: #000000;          /* ✅ ADD THIS */
-    font-size: 15px;
-    white-space: pre-wrap;
-}
+
+/* ------------------------------------------------ */
+/* TABS */
+/* ------------------------------------------------ */
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg,#9c27b0,#e91e63);
+    color:white;
+    border-radius: 10px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -228,4 +335,5 @@ if uploaded:
 
 else:
     st.info("Upload a medical report to begin.")
+
 
