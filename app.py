@@ -8,31 +8,28 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
 from extractor import extract_text
-from Bertgpt import (
-    clean_and_segment,
-    extract_entities,
-    classify_intents,
-    build_structured_intent,
-    generate_diet_guidelines
+
+# -------------------------------------------------
+# PAGE CONFIG
+# -------------------------------------------------
+st.set_page_config(
+    page_title="AI Diet Planner",
+    page_icon="🥗",
+    layout="wide"
 )
 
-# ---------------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------------
-st.set_page_config(page_title="AI Diet Planner", page_icon="🥗", layout="wide")
-
-# ---------------------------------------------------------
-# PROFESSIONAL WHITE UI
-# ---------------------------------------------------------
+# -------------------------------------------------
+# WHITE PROFESSIONAL UI
+# -------------------------------------------------
 st.markdown("""
 <style>
 .main {
-    background-color: #f7f9fc;
+    background: #f6f8fb;
 }
 
-/* Header */
+/* header */
 .header {
-    background: linear-gradient(90deg,#4CAF50,#2E7D32);
+    background: linear-gradient(90deg,#4f46e5,#7c3aed);
     padding: 25px;
     border-radius: 14px;
     color: white;
@@ -40,77 +37,51 @@ st.markdown("""
     margin-bottom: 25px;
 }
 
-/* Cards */
+/* cards */
 .card {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    margin-bottom: 18px;
-}
-
-/* Stats */
-.stat {
     background: white;
     padding: 18px;
     border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
 }
 
-.stat h2 {
-    color: #2E7D32;
-    margin: 0;
-}
-
-/* Day boxes */
+/* day boxes */
 .daybox {
-    background: #ffffff;
+    background: white;
+    border-left: 6px solid #4f46e5;
     padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    border-left: 5px solid #4CAF50;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* Buttons */
-.stButton>button {
-    background-color:#4CAF50;
-    color:white;
-    border-radius:10px;
-    height:42px;
-    font-weight:600;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
 }
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
+# -------------------------------------------------
 # HEADER
-# ---------------------------------------------------------
+# -------------------------------------------------
 st.markdown("""
 <div class="header">
 <h1>🥗 AI Diet Planner</h1>
-<p>Upload your medical report and generate a personalized weekly diet plan</p>
+<p>Upload your medical report → Generate personalized weekly diet plan</p>
 </div>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# LOAD OPENAI + MODEL
-# ---------------------------------------------------------
+
+# -------------------------------------------------
+# OPENAI
+# -------------------------------------------------
 @st.cache_resource
 def load_openai():
     return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-@st.cache_resource
-def load_model():
-    return joblib.load("best_model.pkl")
-
 client = load_openai()
-model = load_model()
 
-# ---------------------------------------------------------
-# PDF CREATOR
-# ---------------------------------------------------------
+
+# -------------------------------------------------
+# PDF generator
+# -------------------------------------------------
 def create_pdf(text):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer)
@@ -126,20 +97,49 @@ def create_pdf(text):
     return buffer
 
 
-# ---------------------------------------------------------
-# DIET PARSER
-# ---------------------------------------------------------
-def parse_days(plan):
+# -------------------------------------------------
+# Diet generator
+# -------------------------------------------------
+def generate_plan(text):
+
+    prompt = f"""
+Create a clean 7-day Indian diet plan based on this medical report:
+
+{text[:4000]}
+
+Format:
+
+Day 1
+Breakfast:
+Lunch:
+Dinner:
+
+Day 2
+...
+"""
+
+    res = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role":"user","content":prompt}]
+    )
+
+    return res.choices[0].message.content
+
+
+# -------------------------------------------------
+# Parser
+# -------------------------------------------------
+def parse_plan(plan):
     days = []
     current = None
 
     for line in plan.split("\n"):
-        if "day" in line.lower():
+        if line.lower().startswith("day"):
             if current:
                 days.append(current)
-            current = {"title": line, "text": ""}
+            current = {"title": line, "content": ""}
         elif current:
-            current["text"] += line + "\n"
+            current["content"] += line + "\n"
 
     if current:
         days.append(current)
@@ -147,132 +147,74 @@ def parse_days(plan):
     return days
 
 
-# ---------------------------------------------------------
-# DIET GENERATOR
-# ---------------------------------------------------------
-def generate_plan(structured, prediction):
+# -------------------------------------------------
+# UI FLOW
+# -------------------------------------------------
+st.markdown("### 📤 Upload Medical Report")
 
-    prompt = f"""
-Create a clear 7-day Indian diet plan.
-
-Condition: {structured}
-Risk score: {prediction}
-
-For each day include:
-Breakfast
-Lunch
-Dinner
-"""
-
-    res = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    return res.choices[0].message.content
+uploaded = st.file_uploader(
+    "PDF / TXT / CSV",
+    type=["pdf","txt","csv"]
+)
 
 
-# =========================================================
-# MAIN UI
-# =========================================================
+if uploaded:
 
-# Upload section
-with st.container():
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.markdown('<div class="card">', unsafe_allow_html=True)
 
-    uploaded = st.file_uploader(
-        "📄 Upload Medical Report (PDF / CSV / TXT)",
-        type=["pdf", "csv", "txt"]
-    )
+    text, numeric_data = extract_text(uploaded)
 
-    generate_btn = st.button("🚀 Generate Diet Plan")
+    st.write(f"📄 Extracted characters: **{len(text)}**")
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    generate_btn = st.button("🥗 Generate Diet Plan", use_container_width=True)
 
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# RUN PIPELINE ONLY WHEN BUTTON CLICKED
-# ---------------------------------------------------------
-if uploaded and generate_btn:
+    # -------------------------------------------------
+    # GENERATE BUTTON
+    # -------------------------------------------------
+    if generate_btn:
 
-    with st.spinner("Analyzing report and generating diet..."):
+        with st.spinner("Generating personalized diet plan..."):
 
-        text, numeric_data = extract_text(uploaded)
+            plan = generate_plan(text)
 
-        # Stats
-        col1, col2, col3 = st.columns(3)
+        st.success("Diet Plan Ready ✅")
 
-        col1.markdown(
-            f"<div class='stat'><h2>{len(text)}</h2><p>Characters</p></div>",
-            unsafe_allow_html=True
+        # -------------------------------------------------
+        # DISPLAY BOXES
+        # -------------------------------------------------
+        st.markdown("## 🥗 Weekly Diet Plan")
+
+        for day in parse_plan(plan):
+            st.markdown(
+                f"<div class='daybox'><h4>{day['title']}</h4><pre>{day['content']}</pre></div>",
+                unsafe_allow_html=True
+            )
+
+        # -------------------------------------------------
+        # DOWNLOADS
+        # -------------------------------------------------
+        st.markdown("## ⬇️ Download Report")
+
+        col1, col2 = st.columns(2)
+
+        json_data = {
+            "date": str(datetime.now()),
+            "diet_plan": plan
+        }
+
+        col1.download_button(
+            "Download JSON",
+            json.dumps(json_data, indent=2),
+            file_name="diet_plan.json"
         )
 
-        sentences = clean_and_segment(text)
-        entities = extract_entities(sentences)
-        intents = classify_intents(sentences)
-
-        structured = build_structured_intent(entities, intents)
-        guidelines = generate_diet_guidelines(structured)
-
-        col2.markdown(
-            f"<div class='stat'><h2>{len(entities)}</h2><p>Entities</p></div>",
-            unsafe_allow_html=True
+        col2.download_button(
+            "Download PDF",
+            create_pdf(plan),
+            file_name="diet_plan.pdf"
         )
-
-        if numeric_data:
-            prediction = model.predict([list(numeric_data.values())])[0]
-        else:
-            prediction = "N/A"
-
-        col3.markdown(
-            f"<div class='stat'><h2>{prediction}</h2><p>Risk Score</p></div>",
-            unsafe_allow_html=True
-        )
-
-        plan = generate_plan(guidelines, prediction)
-
-    st.divider()
-
-    # ---------------------------------------------------------
-    # SHOW DIET IN PROFESSIONAL BOXES
-    # ---------------------------------------------------------
-    st.subheader("🥗 Weekly Diet Plan")
-
-    for day in parse_days(plan):
-        st.markdown(
-            f"<div class='daybox'><h4>{day['title']}</h4><pre>{day['text']}</pre></div>",
-            unsafe_allow_html=True
-        )
-
-    # ---------------------------------------------------------
-    # DOWNLOAD SECTION
-    # ---------------------------------------------------------
-    st.subheader("⬇️ Download Report")
-
-    col1, col2 = st.columns(2)
-
-    json_data = {
-        "generated_date": str(datetime.now()),
-        "prediction": str(prediction),
-        "diet_plan": plan
-    }
-
-    col1.download_button(
-        "📄 Download JSON",
-        json.dumps(json_data, indent=2),
-        file_name="diet_plan.json"
-    )
-
-    pdf_buffer = create_pdf(plan)
-
-    col2.download_button(
-        "📑 Download PDF",
-        pdf_buffer,
-        file_name="diet_plan.pdf"
-    )
-
-elif uploaded and not generate_btn:
-    st.info("Click **Generate Diet Plan** to start analysis.")
 
 else:
     st.info("Upload a medical report to begin.")
