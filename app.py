@@ -35,155 +35,281 @@ st.set_page_config(
 # Custom CSS
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-    font-family: 'Poppins', sans-serif;
-}
-
-/* ------------------------------------------------ */
-/* CLEANER BACKGROUND (less noisy, more pro) */
-/* ------------------------------------------------ */
-.main {
-    background: linear-gradient(135deg,#f8fafc,#eef2f7);
-}
-
-/* Hide Streamlit branding */
-#MainMenu, footer, header {visibility:hidden;}
-
-
-/* ------------------------------------------------ */
-/* HEADER – slightly sharper */
-/* ------------------------------------------------ */
-.custom-header {
-    background: linear-gradient(135deg,#9c27b0,#e91e63);
-    padding: 1.6rem;
-    border-radius: 18px;
-    margin-bottom: 1.6rem;
-    box-shadow: 0 8px 30px rgba(156,39,176,.25);
-}
-
-.custom-header h1 {
-    font-size: 2.6rem;
-}
-
-
-/* ------------------------------------------------ */
-/* CARDS – more professional density */
-/* ------------------------------------------------ */
-.card {
-    background: white;
-    padding: 1.4rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 18px rgba(0,0,0,.08);
-    transition: .25s;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-}
-
-
-/* ------------------------------------------------ */
-/* STAT CARDS – numbers pop */
-/* ------------------------------------------------ */
-.stat-card {
-    background: white;
-    padding: 1.2rem;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,.06);
-    border-top: 5px solid #e91e63;
-}
-
-.stat-card h2 {
-    font-size: 2.2rem;
-    color: #9c27b0;
-}
-
-
-/* ------------------------------------------------ */
-/* DAY CARD – premium look */
-/* ------------------------------------------------ */
-.day-card {
-    background: white;
-    padding: 1.2rem;
-    border-radius: 14px;
-    margin-bottom: 1.2rem;
-    border-left: 6px solid #9c27b0;
-    box-shadow: 0 3px 14px rgba(0,0,0,.06);
-    transition: .25s;
-}
-
-.day-card:hover {
-    transform: translateX(6px);
-}
-
-/* FIX TEXT VISIBILITY (IMPORTANT) */
-.day-card,
-.day-card p,
-.day-card div,
-.day-card span {
-    color: #111 !important;
-}
-
-
-/* ------------------------------------------------ */
-/* MEAL BOXES – glass style */
-/* ------------------------------------------------ */
-.meal-section {
-    background: #fafafa;
-    padding: .9rem;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 8px rgba(0,0,0,.04);
-    transition: .2s;
-}
-
-.meal-section:hover {
-    background: #fff;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
-}
-
-.meal-section h4 {
-    color: #e91e63;
-}
-
-
-/* ------------------------------------------------ */
-/* UPLOADER */
-/* ------------------------------------------------ */
-[data-testid="stFileUploader"] {
-    background: white;
-    padding: 1.2rem;
-    border-radius: 14px;
-    border: 2px dashed #9c27b0;
-}
-
-
-/* ------------------------------------------------ */
-/* BUTTONS */
-/* ------------------------------------------------ */
-.stButton>button {
-    background: linear-gradient(135deg,#9c27b0,#e91e63);
-    border-radius: 12px;
-    font-weight: 600;
-    height: 42px;
-}
-
-.stButton>button:hover {
-    transform: scale(1.03);
-}
-
-
-/* ------------------------------------------------ */
-/* TABS */
-/* ------------------------------------------------ */
-.stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg,#9c27b0,#e91e63);
-    color:white;
-    border-radius: 10px;
-}
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Main background */
+    .main {
+        background: linear-gradient(135deg, #ffffff 0%, #fce4ec 25%, #f3e5f5 50%, #e1f5fe 75%, #ffffff 100%);
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Custom header */
+    .custom-header {
+        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 40px rgba(156, 39, 176, 0.3);
+        text-align: center;
+    }
+    
+    .custom-header h1 {
+        color: white;
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .custom-header p {
+        color: #fce4ec;
+        font-size: 1.2rem;
+        margin: 0.5rem 0 0 0;
+        font-weight: 300;
+    }
+    
+    .custom-header .credit {
+        color: white;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+    
+    /* Cards */
+    .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(156, 39, 176, 0.15);
+        margin-bottom: 2rem;
+        border: 1px solid rgba(156, 39, 176, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 48px rgba(156, 39, 176, 0.25);
+    }
+    
+    /* Day card for diet plan */
+    .day-card {
+        background: linear-gradient(135deg, #ffffff 0%, #fce4ec 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        border-left: 5px solid #9c27b0;
+        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .day-card:hover {
+        transform: translateX(10px);
+        box-shadow: 0 6px 24px rgba(156, 39, 176, 0.2);
+    }
+    
+    .day-card h3 {
+        color: #9c27b0;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+    }
+    
+    .meal-section {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.8rem;
+        border: 1px solid rgba(233, 30, 99, 0.2);
+    }
+    
+    .meal-section h4 {
+        color: #e91e63;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .meal-section p {
+        color: #424242;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* File uploader */
+    [data-testid="stFileUploader"] {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 2px dashed #9c27b0;
+        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+    }
+    
+    [data-testid="stFileUploader"]:hover {
+        border-color: #e91e63;
+        background: #fce4ec;
+    }
+    
+    /* Buttons */
+    .stButton>button {
+        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+        color: white;
+        border-radius: 25px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.3);
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(156, 39, 176, 0.4);
+        background: linear-gradient(135deg, #7b1fa2 0%, #c2185b 100%);
+    }
+    
+    /* Download buttons */
+    .download-btn {
+        background: white;
+        color: #9c27b0;
+        border: 2px solid #9c27b0;
+        border-radius: 25px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .download-btn:hover {
+        background: #9c27b0;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2rem;
+        background: white;
+        padding: 1rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: transparent;
+        color: #9c27b0;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+        color: white;
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div > div > div {
+        background: linear-gradient(90deg, #9c27b0 0%, #e91e63 100%);
+    }
+    
+    /* Info boxes */
+    .stAlert {
+        border-radius: 15px;
+        border-left: 5px solid #9c27b0;
+    }
+    
+    /* Text area */
+    .stTextArea textarea {
+        border-radius: 15px;
+        border: 2px solid rgba(156, 39, 176, 0.2);
+    }
+    
+    .stTextArea textarea:focus {
+        border-color: #9c27b0;
+        box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.1);
+    }
+    
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #f3e5f5 0%, #fce4ec 100%);
+    }
+    
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3 {
+        color: #9c27b0;
+    }
+    
+    /* Success/Error messages */
+    .element-container div[data-testid="stMarkdownContainer"] p {
+        line-height: 1.6;
+    }
+    
+    /* Info box styling */
+    .info-box {
+        background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        border-left: 5px solid #9c27b0;
+        margin: 1rem 0;
+    }
+    
+    .info-box h4 {
+        color: #9c27b0;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Stats cards */
+    .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(156, 39, 176, 0.1);
+        border-top: 4px solid #e91e63;
+    }
+    
+    .stat-card h2 {
+        color: #9c27b0;
+        font-size: 2.5rem;
+        margin: 0;
+        font-weight: 700;
+    }
+    
+    .stat-card p {
+        color: #757575;
+        margin: 0.5rem 0 0 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .card, .day-card {
+        animation: slideIn 0.5s ease-out;
+    }
 </style>
 """, unsafe_allow_html=True)
 
