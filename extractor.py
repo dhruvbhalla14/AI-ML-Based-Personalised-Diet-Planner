@@ -3,16 +3,20 @@ import pandas as pd
 
 
 def extract_text(uploaded_file):
+    """
+    Cloud-safe extractor
+    NO OCR
+    NO tesseract
+    """
+
     text = ""
     numeric_data = None
 
-    filename = getattr(uploaded_file, "name", "")
-    file_type = filename.split(".")[-1].lower()
-
-    uploaded_file.seek(0)
+    name = getattr(uploaded_file, "name", "")
+    file_type = name.split(".")[-1].lower()
 
     # -------------------------
-    # PDF (digital text only)
+    # PDF (text only)
     # -------------------------
     if file_type == "pdf":
         with pdfplumber.open(uploaded_file) as pdf:
@@ -32,11 +36,7 @@ def extract_text(uploaded_file):
     # -------------------------
     elif file_type == "csv":
         df = pd.read_csv(uploaded_file)
-        text = df.iloc[0].astype(str).str.cat(sep=" ")
+        text = df.astype(str).to_string()
         numeric_data = df.iloc[0].to_dict()
-
-    # images disabled on cloud
-    else:
-        text = "Unsupported file type for cloud deployment."
 
     return text.strip(), numeric_data
