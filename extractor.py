@@ -1,5 +1,4 @@
 import pdfplumber
-import pytesseract
 from PIL import Image
 import pandas as pd
 
@@ -14,25 +13,20 @@ def extract_text(uploaded_file):
     uploaded_file.seek(0)
 
     # -------------------------
-    # PDF (OCR fallback)
+    # PDF (ONLY pdfplumber)
     # -------------------------
     if file_type == "pdf":
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
-
-                if page_text and page_text.strip():
+                if page_text:
                     text += page_text + "\n"
-                else:
-                    img = page.to_image(resolution=300).original
-                    text += pytesseract.image_to_string(img) + "\n"
 
     # -------------------------
-    # Images
+    # Images (not supported on cloud)
     # -------------------------
     elif file_type in ["png", "jpg", "jpeg"]:
-        image = Image.open(uploaded_file)
-        text = pytesseract.image_to_string(image)
+        text = "Image OCR not supported on cloud deployment."
 
     # -------------------------
     # TXT
