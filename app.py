@@ -48,12 +48,22 @@ st.markdown("""
 
 /* day boxes */
 .daybox {
-    background: white;
-    border-left: 6px solid #4f46e5;
+    background: #ffffff;
     padding: 16px;
-    border-radius: 10px;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border-left: 5px solid #4CAF50;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    color: #000000;          /* ✅ ADD THIS */
+}
+
+/* force pre text black */
+.daybox pre {
+    color: #000000;          /* ✅ ADD THIS */
+    font-size: 15px;
+    white-space: pre-wrap;
+}
 }
 </style>
 """, unsafe_allow_html=True)
@@ -218,3 +228,4 @@ if uploaded:
 
 else:
     st.info("Upload a medical report to begin.")
+
