@@ -12,3 +12,4 @@ python-dotenv
 spacy
 lightgbm
 scikit-learn
+reportLab
