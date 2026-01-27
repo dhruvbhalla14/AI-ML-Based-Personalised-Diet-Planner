@@ -932,46 +932,30 @@ if uploaded_file:
 
 else:
     st.markdown("""
-    <div class="welcome-card">
-        <h3>👋 Welcome to AI Diet Planner!</h3>
-        <p>
-            Upload your medical report to get started. Our advanced AI will analyze your health data 
-            and create a personalized 7-day Indian diet plan tailored specifically to your needs.
-        </p>
-        
-        <h4>📋 How it works:</h4>
-        <ol>
-            <li><strong>Upload</strong> your medical report (PDF, image, CSV, or text file)</li>
-            <li><strong>Click "Generate Diet Plan"</strong> to start the analysis</li>
-            <li><strong>Review</strong> your personalized diet plan with day-by-day meal suggestions</li>
-            <li><strong>Download</strong> your plan as PDF or JSON for easy reference</li>
-        </ol>
-        
-        <h4>✨ What you'll get:</h4>
-        <ul style="line-height: 2;">
-            <li>🔍 AI-powered analysis of your medical data</li>
-            <li>📊 Health risk assessment</li>
-            <li>🥗 Complete 7-day Indian diet plan</li>
-            <li>🍽️ Breakfast, lunch, and dinner suggestions for each day</li>
-            <li>✅ Foods to eat and ❌ foods to avoid</li>
-            <li>📥 Downloadable PDF and JSON formats</li>
-        </ul>
-        
-        <p style="color: #64748b; font-style: italic; margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0891b2;">
-            ⚠️ <strong>Important:</strong> This tool provides dietary guidance based on AI analysis. 
-            Always consult with qualified healthcare professionals for medical advice.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+<div class="card">
 
-st.markdown("---")
-st.markdown("""
-<div style="text-align: center; padding: 2rem; color: #64748b;">
-    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">
-        Developed with ❤️ by <strong style="color: #1e3a8a;">Dhruv Bhalla</strong>
-    </p>
-    <p style="font-size: 0.95rem;">
-        Powered by AI & Machine Learning | Making healthcare smarter 🥗
-    </p>
+<h4>📋 How it works:</h4>
+<ol>
+    <li><strong>Upload</strong> your medical report (PDF, image, CSV, or text file)</li>
+    <li><strong>Click "Generate Diet Plan"</strong> to start the analysis</li>
+    <li><strong>Review</strong> your personalized diet plan with day-by-day meal suggestions</li>
+    <li><strong>Download</strong> your plan as PDF or JSON for easy reference</li>
+</ol>
+
+<h4>✨ What you'll get:</h4>
+<ul style="line-height: 2;">
+    <li>🔍 AI-powered analysis of your medical data</li>
+    <li>📊 Health risk assessment</li>
+    <li>🥗 Complete 7-day Indian diet plan</li>
+    <li>🍽️ Breakfast, lunch, and dinner suggestions for each day</li>
+    <li>✅ Foods to eat and ❌ foods to avoid</li>
+    <li>📥 Downloadable PDF and JSON formats</li>
+</ul>
+
+<p style="color:#64748b;font-style:italic;margin-top:1.5rem;padding:1rem;background:#f0f9ff;border-radius:8px;border-left:4px solid #0891b2;">
+⚠️ <strong>Important:</strong> This tool provides dietary guidance based on AI analysis.
+Always consult healthcare professionals.
+</p>
+
 </div>
 """, unsafe_allow_html=True)
