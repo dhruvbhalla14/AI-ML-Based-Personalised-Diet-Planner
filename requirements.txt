@@ -9,3 +9,4 @@ pdfplumber
 pytesseract
 openai
 python-dotenv
+spacy
