@@ -81,7 +81,19 @@ textarea {
 """, unsafe_allow_html=True)
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Initialize OpenAI client
+@st.cache_resource
+def init_openai():
+    return OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+try:
+    client = init_openai()
+    if client:
+        st.success('✅ API key loaded', icon="✅")
+except Exception as e:
+    st.error(f'❌ API key not found: {e}')
+    client = None
 
 # -----------------------
 # Load model
@@ -90,13 +102,19 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def load_model():
     return joblib.load("best_model.pkl")
 
-model = load_model()
+try:
+    model = load_model()
+except Exception as e:
+    st.error(f"Model loading error: {e}")
+    model = None
 
 
 # -----------------------
 # Diet Plan Generator
 # -----------------------
 def generate_week_plan(structured, prediction):
+    if not client:
+        return "⚠️ OpenAI client not initialized. Please check your API key."
 
     prompt = f"""
 You are an expert clinical nutritionist.
@@ -120,13 +138,15 @@ IMPORTANT:
 This is only guidance, not medical advice.
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
-    )
-
-    return response.choices[0].message.content
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"⚠️ Error generating plan: {e}"
 
 
 # -----------------------
@@ -144,12 +164,17 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file:
 
-    with st.spinner("Generating diet plan..."):
-        
+    # Create progress tracking
+    progress_bar = st.progress(0)
+    status_text = st.empty()
 
+    try:
         # -----------------------
         # 1 Extract text
         # -----------------------
+        status_text.text("📄 Extracting text from document...")
+        progress_bar.progress(20)
+        
         text, numeric_data = extract_text(uploaded_file)
 
         st.subheader("📄 Extracted Text")
@@ -158,11 +183,19 @@ if uploaded_file:
         # -----------------------
         # 2 NLP pipeline
         # -----------------------
+        status_text.text("🧠 Analyzing medical information (this may take a minute on first load)...")
+        progress_bar.progress(40)
+        
         sentences = clean_and_segment(text)
+        
+        progress_bar.progress(50)
         entities = extract_entities(sentences)
+        
+        progress_bar.progress(60)
         intents = classify_intents(sentences)
+        
+        progress_bar.progress(70)
         structured = build_structured_intent(entities, intents)
-
         guidelines = generate_diet_guidelines(structured)
 
         st.subheader("🧠 Detected Medical Info")
@@ -171,7 +204,10 @@ if uploaded_file:
         # -----------------------
         # 3 ML prediction
         # -----------------------
-        if numeric_data:
+        status_text.text("📊 Running health assessment...")
+        progress_bar.progress(80)
+        
+        if numeric_data and model:
             features = [list(numeric_data.values())]
             prediction = model.predict(features)[0]
         else:
@@ -183,7 +219,24 @@ if uploaded_file:
         # -----------------------
         # 4 LLM diet plan
         # -----------------------
+        status_text.text("🥗 Generating personalized diet plan...")
+        progress_bar.progress(90)
+        
         plan = generate_week_plan(guidelines, prediction)
+
+        progress_bar.progress(100)
+        status_text.text("✅ Complete!")
 
         st.subheader("🥗 Your Weekly Diet Plan")
         st.write(plan)
+
+    except Exception as e:
+        st.error(f"⚠️ Error processing: {e}")
+        st.info("Please try uploading a different file or check the format.")
+    
+    finally:
+        # Clean up progress indicators after a short delay
+        import time
+        time.sleep(1)
+        progress_bar.empty()
+        status_text.empty()
