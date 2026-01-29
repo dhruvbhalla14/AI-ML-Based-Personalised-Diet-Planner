@@ -375,36 +375,72 @@ st.markdown("""
     
     /* Success/Error messages */
     /* Success/Error messages - FIXED VISIBILITY */
-.stSuccess {
-    background-color: #d1fae5 !important;
+    /* Success/Error messages - LIGHT BACKGROUNDS FOR VISIBILITY */
+
+/* Success boxes - Light green background */
+.stSuccess,
+.stSuccess > div,
+[data-testid="stNotification"][data-baseweb="notification"] {
+    background-color: #f0fdf4 !important;
+    border-left: 4px solid #22c55e !important;
 }
 
-.stSuccess * {
-    color: #065f46 !important;
+.stSuccess *,
+.stSuccess p,
+.stSuccess div {
+    color: #166534 !important;
+    background-color: transparent !important;
 }
 
-.stError {
-    background-color: #fee2e2 !important;
+/* Error boxes - Light red background */
+.stError,
+.stError > div,
+[data-testid="stNotification"][data-baseweb="notification"].error {
+    background-color: #fef2f2 !important;
+    border-left: 4px solid #ef4444 !important;
 }
 
-.stError * {
+.stError *,
+.stError p,
+.stError div {
     color: #991b1b !important;
+    background-color: transparent !important;
 }
 
-.stInfo {
-    background-color: #e0f2fe !important;
+/* Info boxes - Light blue background */
+.stInfo,
+.stInfo > div,
+[data-testid="stNotification"][data-baseweb="notification"].info {
+    background-color: #f0f9ff !important;
+    border-left: 4px solid #3b82f6 !important;
 }
 
-.stInfo * {
-    color: #0c4a6e !important;
+.stInfo *,
+.stInfo p,
+.stInfo div {
+    color: #1e40af !important;
+    background-color: transparent !important;
 }
 
-.stWarning {
-    background-color: #fef3c7 !important;
+/* Warning boxes - Light yellow background */
+.stWarning,
+.stWarning > div,
+[data-testid="stNotification"][data-baseweb="notification"].warning {
+    background-color: #fffbeb !important;
+    border-left: 4px solid #f59e0b !important;
 }
 
-.stWarning * {
-    color: #78350f !important;
+.stWarning *,
+.stWarning p,
+.stWarning div {
+    color: #92400e !important;
+    background-color: transparent !important;
+}
+
+/* Force override any dark backgrounds */
+div[data-testid="stNotification"],
+.element-container .stAlert {
+    background-color: transparent !important;
 }
 
     /* JSON display - HIGH CONTRAST */
@@ -982,6 +1018,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
