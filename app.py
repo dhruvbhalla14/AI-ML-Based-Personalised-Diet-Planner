@@ -374,26 +374,39 @@ st.markdown("""
     }
     
     /* Success/Error messages */
-    .stSuccess {
-        background-color: #d1fae5 !important;
-        color: #065f46 !important;
-    }
-    
-    .stError {
-        background-color: #fee2e2 !important;
-        color: #991b1b !important;
-    }
-    
-    .stInfo {
-        background-color: #dbeafe !important;
-        color: #1e40af !important;
-    }
-    
-    .stWarning {
-        background-color: #fef3c7 !important;
-        color: #92400e !important;
-    }
-    
+    /* Success/Error messages - FIXED VISIBILITY */
+.stSuccess {
+    background-color: #d1fae5 !important;
+}
+
+.stSuccess * {
+    color: #065f46 !important;
+}
+
+.stError {
+    background-color: #fee2e2 !important;
+}
+
+.stError * {
+    color: #991b1b !important;
+}
+
+.stInfo {
+    background-color: #e0f2fe !important;
+}
+
+.stInfo * {
+    color: #0c4a6e !important;
+}
+
+.stWarning {
+    background-color: #fef3c7 !important;
+}
+
+.stWarning * {
+    color: #78350f !important;
+}
+
     /* JSON display - HIGH CONTRAST */
     pre {
         background-color: #f8fafc !important;
@@ -969,6 +982,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
