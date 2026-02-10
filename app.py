@@ -367,76 +367,74 @@ st.markdown("""
         border-bottom: 3px solid #0891b2;
     }
     
-    /* ===== FIXED: Success/Error/Info/Warning messages ===== */
-    /* Success boxes - Light green background with dark text */
+    /* ===== CRITICAL FIX: Streamlit Alert Boxes ===== */
+    
+    /* INFO BOXES - LIGHT BLUE with WHITE TEXT */
+    .stAlert[data-baseweb="notification"],
+    div[data-baseweb="notification"],
+    .element-container div[data-baseweb="notification"] {
+        background-color: #1e40af !important;
+        border-left: 5px solid #60a5fa !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+    }
+    
+    .stAlert[data-baseweb="notification"] *,
+    div[data-baseweb="notification"] *,
+    div[data-baseweb="notification"] div,
+    div[data-baseweb="notification"] p {
+        color: #ffffff !important;
+        background-color: transparent !important;
+    }
+    
+    /* SUCCESS BOXES - GREEN with WHITE TEXT */
     .stSuccess,
     .stSuccess > div,
-    [data-testid="stNotification"][kind="success"] {
-        background-color: #f0fdf4 !important;
-        border-left: 4px solid #22c55e !important;
+    div.stSuccess {
+        background-color: #16a34a !important;
+        border-left: 5px solid #4ade80 !important;
         border-radius: 8px !important;
+        padding: 1rem !important;
     }
-
+    
     .stSuccess *,
-    .stSuccess p,
     .stSuccess div,
-    .stSuccess ul,
-    .stSuccess li {
-        color: #166534 !important;
+    .stSuccess p {
+        color: #ffffff !important;
         background-color: transparent !important;
     }
-
-    /* Error boxes - Light red background with dark text */
+    
+    /* ERROR BOXES - RED with WHITE TEXT */
     .stError,
     .stError > div,
-    [data-testid="stNotification"][kind="error"] {
-        background-color: #fef2f2 !important;
-        border-left: 4px solid #ef4444 !important;
+    div.stError {
+        background-color: #dc2626 !important;
+        border-left: 5px solid #f87171 !important;
         border-radius: 8px !important;
+        padding: 1rem !important;
     }
-
+    
     .stError *,
-    .stError p,
     .stError div,
-    .stError ul,
-    .stError li {
-        color: #991b1b !important;
+    .stError p {
+        color: #ffffff !important;
         background-color: transparent !important;
     }
-
-    /* Info boxes - Light blue background with dark text */
-    .stInfo,
-    .stInfo > div,
-    [data-testid="stNotification"][kind="info"] {
-        background-color: #eff6ff !important;
-        border-left: 4px solid #3b82f6 !important;
-        border-radius: 8px !important;
-    }
-
-    .stInfo *,
-    .stInfo p,
-    .stInfo div,
-    .stInfo ul,
-    .stInfo li {
-        color: #1e40af !important;
-        background-color: transparent !important;
-    }
-
-    /* Warning boxes - Light yellow background with dark text */
+    
+    /* WARNING BOXES - YELLOW/ORANGE with DARK TEXT */
     .stWarning,
     .stWarning > div,
-    [data-testid="stNotification"][kind="warning"] {
-        background-color: #fffbeb !important;
-        border-left: 4px solid #f59e0b !important;
+    div.stWarning {
+        background-color: #fbbf24 !important;
+        border-left: 5px solid #f59e0b !important;
         border-radius: 8px !important;
+        padding: 1rem !important;
     }
-
+    
     .stWarning *,
-    .stWarning p,
     .stWarning div,
-    .stWarning ul,
-    .stWarning li {
-        color: #92400e !important;
+    .stWarning p {
+        color: #78350f !important;
         background-color: transparent !important;
     }
     
@@ -1011,6 +1009,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
