@@ -33,6 +33,8 @@ st.set_page_config(
 )
 
 # Custom CSS - Fixed visibility issues
+# Replace the Custom CSS section in your code with this updated version:
+
 st.markdown("""
 <style>
     /* Import Google Fonts */
@@ -64,12 +66,9 @@ st.markdown("""
     
     .custom-header h1,
     .custom-header h1 * {
-    color: #ffffff !important;
-    text-shadow: none !important;
-}
-    .card {
-    color: #1f2937 !important;
-}
+        color: #ffffff !important;
+        text-shadow: none !important;
+    }
     
     .custom-header p {
         color: #e0f2fe;
@@ -137,13 +136,6 @@ st.markdown("""
     }
     
     /* Cards */
-    /* ===== FIX TEXT VISIBILITY IN WELCOME CARD ===== */
-    .card h4,
-    .card li,
-    .card ol,
-    .card ul {
-    color: #1f2937 !important;
-}
     .card {
         background: white;
         padding: 2rem;
@@ -159,9 +151,11 @@ st.markdown("""
         box-shadow: 0 8px 30px rgba(30, 58, 138, 0.15);
     }
     
-    .card h4 {
-        color: #1e3a8a !important;
-        font-weight: 600;
+    .card h4,
+    .card li,
+    .card ol,
+    .card ul {
+        color: #1f2937 !important;
     }
     
     .card p, .card div {
@@ -373,76 +367,79 @@ st.markdown("""
         border-bottom: 3px solid #0891b2;
     }
     
-    /* Success/Error messages */
-    /* Success/Error messages - FIXED VISIBILITY */
-    /* Success/Error messages - LIGHT BACKGROUNDS FOR VISIBILITY */
+    /* ===== FIXED: Success/Error/Info/Warning messages ===== */
+    /* Success boxes - Light green background with dark text */
+    .stSuccess,
+    .stSuccess > div,
+    [data-testid="stNotification"][kind="success"] {
+        background-color: #f0fdf4 !important;
+        border-left: 4px solid #22c55e !important;
+        border-radius: 8px !important;
+    }
 
-/* Success boxes - Light green background */
-.stSuccess,
-.stSuccess > div,
-[data-testid="stNotification"][data-baseweb="notification"] {
-    background-color: #f0fdf4 !important;
-    border-left: 4px solid #22c55e !important;
-}
+    .stSuccess *,
+    .stSuccess p,
+    .stSuccess div,
+    .stSuccess ul,
+    .stSuccess li {
+        color: #166534 !important;
+        background-color: transparent !important;
+    }
 
-.stSuccess *,
-.stSuccess p,
-.stSuccess div {
-    color: #166534 !important;
-    background-color: transparent !important;
-}
+    /* Error boxes - Light red background with dark text */
+    .stError,
+    .stError > div,
+    [data-testid="stNotification"][kind="error"] {
+        background-color: #fef2f2 !important;
+        border-left: 4px solid #ef4444 !important;
+        border-radius: 8px !important;
+    }
 
-/* Error boxes - Light red background */
-.stError,
-.stError > div,
-[data-testid="stNotification"][data-baseweb="notification"].error {
-    background-color: #fef2f2 !important;
-    border-left: 4px solid #ef4444 !important;
-}
+    .stError *,
+    .stError p,
+    .stError div,
+    .stError ul,
+    .stError li {
+        color: #991b1b !important;
+        background-color: transparent !important;
+    }
 
-.stError *,
-.stError p,
-.stError div {
-    color: #991b1b !important;
-    background-color: transparent !important;
-}
+    /* Info boxes - Light blue background with dark text */
+    .stInfo,
+    .stInfo > div,
+    [data-testid="stNotification"][kind="info"] {
+        background-color: #eff6ff !important;
+        border-left: 4px solid #3b82f6 !important;
+        border-radius: 8px !important;
+    }
 
-/* Info boxes - Light blue background */
-.stInfo,
-.stInfo > div,
-[data-testid="stNotification"][data-baseweb="notification"].info {
-    background-color: #f0f9ff !important;
-    border-left: 4px solid #3b82f6 !important;
-}
+    .stInfo *,
+    .stInfo p,
+    .stInfo div,
+    .stInfo ul,
+    .stInfo li {
+        color: #1e40af !important;
+        background-color: transparent !important;
+    }
 
-.stInfo *,
-.stInfo p,
-.stInfo div {
-    color: #1e40af !important;
-    background-color: transparent !important;
-}
+    /* Warning boxes - Light yellow background with dark text */
+    .stWarning,
+    .stWarning > div,
+    [data-testid="stNotification"][kind="warning"] {
+        background-color: #fffbeb !important;
+        border-left: 4px solid #f59e0b !important;
+        border-radius: 8px !important;
+    }
 
-/* Warning boxes - Light yellow background */
-.stWarning,
-.stWarning > div,
-[data-testid="stNotification"][data-baseweb="notification"].warning {
-    background-color: #fffbeb !important;
-    border-left: 4px solid #f59e0b !important;
-}
-
-.stWarning *,
-.stWarning p,
-.stWarning div {
-    color: #92400e !important;
-    background-color: transparent !important;
-}
-
-/* Force override any dark backgrounds */
-div[data-testid="stNotification"],
-.element-container .stAlert {
-    background-color: transparent !important;
-}
-
+    .stWarning *,
+    .stWarning p,
+    .stWarning div,
+    .stWarning ul,
+    .stWarning li {
+        color: #92400e !important;
+        background-color: transparent !important;
+    }
+    
     /* JSON display - HIGH CONTRAST */
     pre {
         background-color: #f8fafc !important;
@@ -479,12 +476,8 @@ div[data-testid="stNotification"],
     .download-section h3 {
         color: #1e3a8a !important;
     }
-
-
-
 </style>
 """, unsafe_allow_html=True)
-
 # -----------------------
 # Header
 # -----------------------
@@ -1018,6 +1011,7 @@ Always consult healthcare professionals.
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
